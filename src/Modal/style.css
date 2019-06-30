@@ -96,7 +96,7 @@
 	display: inline-block;
 	font-size: 14px;
 	line-height: 1em;
-	margin: 12px;
+	margin: 12px 0;
 	padding: 6px 12px;
 	text-shadow: 0 1px 0px rgba(0, 0, 0, 0.25);
 }
@@ -104,6 +104,10 @@
 .component-modal-actions {
   margin-top: 48px;
   text-align: right;
+}
+
+.component-modal-actions > * {
+  margin-left: 12px;
 }
 
 .component-modal-button--cancel {
@@ -115,6 +119,6 @@
 	display: inline-block;
 	font-size: 14px;
 	line-height: 1em;
-	margin: 12px;
-	padding: 6px 12px;
+	margin: 12px 0;
+	padding: 6px 0;
 }

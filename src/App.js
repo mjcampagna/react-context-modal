@@ -4,8 +4,8 @@ import SampleModal from './SampleModal'
 
 export default () => (
   <ModalProvider>
-    <h1>Welcome to React Parcel Micro App!</h1>
-    <p>Hard to get more minimal than this React app.</p>
+    <h1>React Context Modal</h1>
+    <p>Here be modals.</p>
 
     <ModalButton content={
       <SampleModal />
