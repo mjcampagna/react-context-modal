@@ -88,7 +88,7 @@ const Modal = ({ children }) => {
 	)
 }
 
-const ModalButton = ({ children, content, element = 'button' }) => {
+const ModalButton = ({ children, content, element = 'button', style }) => {
 	const { openModal } = useContext(ModalContext)
 	const Button = element
 	const handleClick = (e) => {
@@ -101,7 +101,8 @@ const ModalButton = ({ children, content, element = 'button' }) => {
   return (
     <Button
 			className="component-modal-button--open"
-      onClick={handleClick}
+			onClick={handleClick}
+			style={{ ...style }}
     >
 			{children}
     </Button>

@@ -1,5 +1,6 @@
 import React from "react"
 import { ModalButton, ModalProvider } from './Modal'
+import LoremIpsum from './LoremIpsum'
 import SampleModal from './SampleModal'
 
 export default () => (
@@ -9,8 +10,14 @@ export default () => (
 
     <ModalButton content={
       <SampleModal />
-    }>
+    } style={{ marginRight: 12 }}>
       Open SampleModal
+    </ModalButton>
+
+    <ModalButton content={
+      <LoremIpsum length={10} />
+    }>
+      Open Long Modal
     </ModalButton>
 
   </ModalProvider>
