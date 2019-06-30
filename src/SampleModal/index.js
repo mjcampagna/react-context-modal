@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ModalButton } from '../Modal'
 
 const EmbeddedModal = (props) => {
@@ -12,9 +12,22 @@ const EmbeddedModal = (props) => {
 }
 
 const SampleModal = (props) => {
+	const [name, setName] = useState('')
+
+	const handleChange = e => setName(e.target.value)
+
+	useEffect(() => {
+		props.passBack({
+			name,
+		})
+	}, [name])
+
 	return (
 		<>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis lacus purus. Phasellus vitae lobortis nulla. Sed non porttitor risus. Proin at neque sed metus finibus sodales sed non arcu. Nulla at enim vulputate, consectetur nibh ac, maximus turpis. Mauris convallis lectus in purus auctor faucibus. Sed tincidunt, eros eget tempor convallis, lorem felis volutpat magna, suscipit vehicula tellus ipsum in ligula. Maecenas placerat scelerisque libero sit amet feugiat. In hac habitasse platea dictumst. Ut sit amet mauris et mauris aliquam vehicula sed at nunc.</p>
+
+			<label style={{ display: 'block' }}>Your Name:</label>
+			<input onChange={handleChange} type="text"></input>
 		</>
 	)
 }
@@ -32,7 +45,7 @@ SampleModal.defaultProps = {
 	],
 	onCancel: () => console.log('Modal canceled'),
 	onCancelLabel: 'Cancel',
-	onSubmit: () => console.log('Modal submitted'),
+	onSubmit: (data) => console.log('Modal submitted', data),
 	onSubmitLabel: 'Submit',
 }
 

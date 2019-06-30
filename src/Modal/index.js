@@ -2,8 +2,9 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import Portal from '../Portal'
 import './style.css'
 
-const Modal = ({ children }) => {
+const Modal = ({ children, ...props }) => {
 	const { closeModal } = useContext(ModalContext)
+	const [passedBackData, setPassedBackData] = useState({})
 
 	useEffect(() => {
 		if (children) {
@@ -14,30 +15,34 @@ const Modal = ({ children }) => {
 	}, [children])
 
 	useEffect(() => {
+		console.log('Passed back', passedBackData)
+	}, [passedBackData])
+
+	useEffect(() => {
 		if (children.props.afterOpen) {
-			children.props.afterOpen()
+			children.props.afterOpen(passedBackData)
 		}
 	}, [])
 
 	const handleClose = () => {
 		if (children.props.beforeClose) {
-			children.props.beforeClose()
+			children.props.beforeClose(passedBackData)
 		}
 		closeModal()
 		if (children.props.afterClose) {
-			children.props.afterClose()
+			children.props.afterClose(passedBackData)
 		}
 	}
 
 	const handleCancel = () => {
 		if (children.props.onCancel) {
-			children.props.onCancel()
+			children.props.onCancel(passedBackData)
 		}
 		handleClose()
 	}
 	const handleSubmit = () => {
 		if (children.props.onSubmit) {
-			children.props.onSubmit()
+			children.props.onSubmit(passedBackData)
 		}
 		handleClose()
 	}
@@ -46,6 +51,10 @@ const Modal = ({ children }) => {
 		return null
 	}
 
+	const childrenWithProps = React.Children.map(children, child =>
+		React.cloneElement(child, { passBack: setPassedBackData })
+	)
+
 	return (
 		<Portal id="modals">
 			<div className="component-modal">
@@ -53,7 +62,7 @@ const Modal = ({ children }) => {
 				<div className="component-modal-inner">
 					<div className="component-modal-exit" onClick={children.props.closeOnOutsideClick ? handleClose : undefined} />
 					<div className="component-modal-card">
-						{children}
+						{childrenWithProps}
 						{children.props.modalActions && (
 							<div className="component-modal-actions">
 								{children.props.modalActions.map(action => {
