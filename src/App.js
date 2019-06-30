@@ -13,7 +13,9 @@ export default () => {
     <ModalProvider>
       <h1>React Context Modal</h1>
       <p>Here be modals.</p>
+
       {name && <p>Hi, {name}!</p>}
+
       <ModalButton content={
         <SampleModal onSubmit={handleName} />
       } style={{ marginRight: 12 }}>

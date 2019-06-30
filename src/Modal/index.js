@@ -51,9 +51,12 @@ const Modal = ({ children, ...props }) => {
 		return null
 	}
 
-	const childrenWithProps = React.Children.map(children, child =>
-		React.cloneElement(child, { passBack: setPassedBackData })
-	)
+	const childrenWithProps = React.Children.map(children, child => {
+		if (typeof child.type === 'string') {
+			return child
+		}
+		return React.cloneElement(child, { passBack: setPassedBackData })
+	})
 
 	return (
 		<Portal id="modals">
