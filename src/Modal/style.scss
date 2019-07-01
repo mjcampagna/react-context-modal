@@ -1,0 +1,138 @@
+.component-modal {
+  backface-visibility: hidden;
+  height: 100%;
+  left: 0;
+  outline: none;
+  position: fixed;
+  top: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  width: 100%;
+  z-index: 99992;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .component-modal-background {
+    background-color: rgba(0,0,0,0.5);
+  }
+  
+  .component-modal-background,
+  .component-modal-inner {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  
+  .component-modal-inner {
+    font-size: 0;
+    overflow: auto;
+    text-align: center;
+  }
+  
+  .component-modal-inner::before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 0;
+  }
+  
+  .component-modal-exit {
+    position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+  }
+  
+  .component-modal-exit.closeOnOutsideClick {
+    cursor: pointer;
+  }
+  
+  .component-modal-card {
+    background: #FFF;
+    border-radius: 3px;
+    color: #333;
+    display: inline-block;
+    font-size: 0.875rem;
+    margin: 24px;
+    max-width: 768px;
+    padding: 44px;
+    position: relative;
+    text-align: left;
+    vertical-align: middle;
+  }
+  
+  @media screen and ( max-width: 640px ) {
+    .component-modal-card {
+      margin: 4px;
+      padding: 44px 44px 44px 22px;
+    }
+  }
+  
+  .component-modal-button--close {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    font-size: 0;
+    font-size: 14px;
+    line-height: 1;
+    outline: none;
+    margin: 0;
+    padding: 16px;
+    position: absolute; top: 0; right: 0;
+  }
+  
+  .component-modal-button--open,
+  .component-modal-button--submit {
+    background: #61dafb;
+    border: none;
+    border-radius: 3px;
+    color: #FFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1em;
+    margin: 12px 0;
+    padding: 6px 12px;
+    text-shadow: 0 1px 0px rgba(0, 0, 0, 0.25);
+  }
+  
+  .component-modal-actions {
+    margin-top: 48px;
+    text-align: right;
+  }
+  
+  .component-modal-actions > * {
+    margin-left: 12px;
+  }
+  
+  .component-modal-button--cancel {
+    background: transparent;
+    border: none;
+    border-radius: 3px;
+    color: #666;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1em;
+    margin: 12px 0;
+    padding: 6px 0;
+  }
+}
+
+.component-modal-button--open {
+  background: #61dafb;
+  border: none;
+  border-radius: 3px;
+  color: #FFF;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1em;
+  margin: 12px 0;
+  padding: 6px 12px;
+  text-shadow: 0 1px 0px rgba(0, 0, 0, 0.25);
+}

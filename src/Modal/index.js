@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import Portal from '../Portal'
-import './style.css'
+import './style.scss'
 
 const Modal = ({ children, ...props }) => {
 	const { closeModal } = useContext(ModalContext)
@@ -135,6 +135,7 @@ const ModalProvider = ({ children }) => {
 			setModals([...modals, [createRandomId(), nextModal]])
 		}
 	}
+	// const openModal = nextModal => setModals([...modals, [createRandomId(), nextModal]])
 	const closeModal = () => setModals([...modals.slice(0, -1)])
 	
 	return (
