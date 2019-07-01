@@ -39,6 +39,7 @@ export default () => {
       </ModalButton>
 
       <div>
+        <p>Modals getting content via Switch function:</p>
         <ModalButton content={() => openModal('one')} style={{ marginRight: 12 }}>One</ModalButton>
         <ModalButton content={() => openModal('two')}>Two</ModalButton>
       </div>
