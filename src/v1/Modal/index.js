@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import Portal from '../Portal'
+import Portal from '../../Portal'
 import './style.scss'
 
 const Modal = ({ children, className, ...props }) => {

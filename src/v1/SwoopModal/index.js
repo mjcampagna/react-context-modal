@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import LoremIpsum from '../LoremIpsum'
+import LoremIpsum from '../../LoremIpsum'
 import './style.scss'
 
 const ModalFooter = (props) => {

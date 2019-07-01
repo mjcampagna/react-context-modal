@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { ModalButton, ModalProvider } from './Modal'
-import LoremIpsum from './LoremIpsum'
+import LoremIpsum from '../LoremIpsum'
 import SampleModal from './SampleModal'
 import SwoopModal from './SwoopModal'
 
