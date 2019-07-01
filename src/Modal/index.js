@@ -5,6 +5,7 @@ import './style.scss'
 const Modal = ({ children, ...props }) => {
 	const { closeModal } = useContext(ModalContext)
 	const [passedBackData, setPassedBackData] = useState({})
+	const childProps = children.props
 
 	useEffect(() => {
 		if (children) {
@@ -19,30 +20,43 @@ const Modal = ({ children, ...props }) => {
 	}, [passedBackData])
 
 	useEffect(() => {
-		if (children.props.afterOpen) {
-			children.props.afterOpen(passedBackData)
+		window.addEventListener('keydown', handleEsc)
+		return () => window.removeEventListener('keydown', handleEsc)
+	}, [])
+
+	useEffect(() => {
+		if (childProps.afterOpen) {
+			childProps.afterOpen(passedBackData)
 		}
 	}, [])
 
 	const handleClose = () => {
-		if (children.props.beforeClose) {
-			children.props.beforeClose(passedBackData)
+		if (childProps.beforeClose) {
+			childProps.beforeClose(passedBackData)
 		}
 		closeModal()
-		if (children.props.afterClose) {
-			children.props.afterClose(passedBackData)
+		if (childProps.afterClose) {
+			childProps.afterClose(passedBackData)
 		}
 	}
 
 	const handleCancel = () => {
-		if (children.props.onCancel) {
-			children.props.onCancel(passedBackData)
+		if (childProps.onCancel) {
+			childProps.onCancel(passedBackData)
 		}
 		handleClose()
 	}
+
+	const handleEsc = (e) => {
+		if (e.key === 'Escape') {
+			e.preventDefault()
+			handleCancel()
+		}
+	}
+
 	const handleSubmit = () => {
-		if (children.props.onSubmit) {
-			children.props.onSubmit(passedBackData)
+		if (childProps.onSubmit) {
+			childProps.onSubmit(passedBackData)
 		}
 		handleClose()
 	}
@@ -63,18 +77,18 @@ const Modal = ({ children, ...props }) => {
 			<div className="component-modal">
 				<div className="modal-background"></div>
 				<div className="modal-inner">
-					<div className="modal-exit" onClick={children.props.closeOnOutsideClick ? handleClose : undefined} />
+					<div className="modal-exit" onClick={childProps.closeOnOutsideClick ? handleClose : undefined} />
 					<div className="modal-card">
 						{childrenWithProps}
-						{children.props.modalActions && (
+						{childProps.modalActions && (
 							<div className="modal-actions">
-								{children.props.modalActions.map(action => {
+								{childProps.modalActions.map(action => {
 									if (action === 'cancel') {
 										return <button
 											className="modal-button--cancel"
 											key="modal-button--cancel"
 											onClick={handleCancel}>
-												{children.props.onCancelLabel || 'Cancel'}
+												{childProps.onCancelLabel || 'Cancel'}
 											</button>
 									} else
 									if (action === 'submit') {
@@ -82,7 +96,7 @@ const Modal = ({ children, ...props }) => {
 											className="modal-button--submit"
 											key="modal-button--submit"
 											onClick={handleSubmit}>
-												{children.props.onSubmitLabel || 'Submit'}
+												{childProps.onSubmitLabel || 'Submit'}
 											</button>
 									} else {
 										return action
@@ -130,9 +144,9 @@ const ModalProvider = ({ children }) => {
 	const createRandomId = () => '_' + Math.random().toString(36).substr(2, 9)
 	const openModal = nextModal => {
 		if (typeof nextModal === 'function') {
-			setModals([...modals, [createRandomId(), nextModal()]])
+			return setModals([...modals, [createRandomId(), nextModal()]])
 		} else {
-			setModals([...modals, [createRandomId(), nextModal]])
+			return setModals([...modals, [createRandomId(), nextModal]])
 		}
 	}
 	// const openModal = nextModal => setModals([...modals, [createRandomId(), nextModal]])
