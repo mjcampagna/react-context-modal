@@ -61,17 +61,17 @@ const Modal = ({ children, ...props }) => {
 	return (
 		<Portal id="modals">
 			<div className="component-modal">
-				<div className="component-modal-background"></div>
-				<div className="component-modal-inner">
-					<div className="component-modal-exit" onClick={children.props.closeOnOutsideClick ? handleClose : undefined} />
-					<div className="component-modal-card">
+				<div className="modal-background"></div>
+				<div className="modal-inner">
+					<div className="modal-exit" onClick={children.props.closeOnOutsideClick ? handleClose : undefined} />
+					<div className="modal-card">
 						{childrenWithProps}
 						{children.props.modalActions && (
-							<div className="component-modal-actions">
+							<div className="modal-actions">
 								{children.props.modalActions.map(action => {
 									if (action === 'cancel') {
 										return <button
-											className="component-modal-button--cancel"
+											className="modal-button--cancel"
 											key="modal-button--cancel"
 											onClick={handleCancel}>
 												{children.props.onCancelLabel || 'Cancel'}
@@ -79,7 +79,7 @@ const Modal = ({ children, ...props }) => {
 									} else
 									if (action === 'submit') {
 										return <button
-											className="component-modal-button--submit"
+											className="modal-button--submit"
 											key="modal-button--submit"
 											onClick={handleSubmit}>
 												{children.props.onSubmitLabel || 'Submit'}
@@ -90,7 +90,7 @@ const Modal = ({ children, ...props }) => {
 								})}
 							</div>
 						)}
-						<button className="component-modal-button--close" onClick={handleClose}>
+						<button className="modal-button--close" onClick={handleClose}>
 							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z" fill="#333" /></svg>
 						</button>
 					</div>
