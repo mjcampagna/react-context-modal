@@ -1,0 +1,43 @@
+.component-modal {
+	.modal-card {
+		padding: 0 12px;
+
+		> :first-child {
+			&:not(header) {
+				margin-top: 48px;
+			}
+		}
+
+		> :nth-last-child(2) {
+			&:not(footer) {
+				margin-bottom: 48px;
+			}
+		}
+
+	}
+}
+
+.component-modal-header {
+	background-color: #565656;
+	border-radius: 3px 3px 0 0;
+	box-sizing: border-box;
+	color: #fff;
+	line-height: 44px;
+	margin: 0 -12px 12px;
+	padding: 0 56px 0 12px;
+}
+
+.component-modal-footer {
+	background-color: #565656;
+	border-radius: 0 0 3px 3px;
+	box-sizing: border-box;
+	color: #fff;
+	height: 44px;
+	line-height: 32px;
+	margin: 12px -12px 0;
+	padding: 6px 12px;
+
+	+ .modal-button--close {
+		color: #fff;
+	}
+}

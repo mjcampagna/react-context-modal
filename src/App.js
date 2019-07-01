@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { ModalButton, ModalProvider } from './Modal'
 import LoremIpsum from './LoremIpsum'
 import SampleModal from './SampleModal'
+import SwoopModal from './SwoopModal'
 
 export default () => {
   const [name, setName] = useState(null)
@@ -34,8 +35,16 @@ export default () => {
 
       <ModalButton content={
         <LoremIpsum length={10} />
+      } style={{ marginRight: 12 }}>
+      Open Long Modal
+      </ModalButton>
+
+      <ModalButton content={
+        <SwoopModal>
+          <LoremIpsum length={3} title="Lorem Ipsum ..." />
+        </SwoopModal>
       }>
-        Open Long Modal
+        Swoop Modal
       </ModalButton>
 
       <div>

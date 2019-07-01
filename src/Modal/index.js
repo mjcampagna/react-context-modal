@@ -2,10 +2,10 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import Portal from '../Portal'
 import './style.scss'
 
-const Modal = ({ children, ...props }) => {
+const Modal = ({ children, className, ...props }) => {
+	const contentProps = children.props
 	const { closeModal } = useContext(ModalContext)
 	const [passedBackData, setPassedBackData] = useState({})
-	const childProps = children.props
 
 	useEffect(() => {
 		if (children) {
@@ -25,24 +25,24 @@ const Modal = ({ children, ...props }) => {
 	}, [])
 
 	useEffect(() => {
-		if (childProps.afterOpen) {
-			childProps.afterOpen(passedBackData)
+		if (contentProps.afterOpen) {
+			contentProps.afterOpen(passedBackData)
 		}
 	}, [])
 
 	const handleClose = () => {
-		if (childProps.beforeClose) {
-			childProps.beforeClose(passedBackData)
+		if (contentProps.beforeClose) {
+			contentProps.beforeClose(passedBackData)
 		}
 		closeModal()
-		if (childProps.afterClose) {
-			childProps.afterClose(passedBackData)
+		if (contentProps.afterClose) {
+			contentProps.afterClose(passedBackData)
 		}
 	}
 
 	const handleCancel = () => {
-		if (childProps.onCancel) {
-			childProps.onCancel(passedBackData)
+		if (contentProps.onCancel) {
+			contentProps.onCancel(passedBackData)
 		}
 		handleClose()
 	}
@@ -55,8 +55,8 @@ const Modal = ({ children, ...props }) => {
 	}
 
 	const handleSubmit = () => {
-		if (childProps.onSubmit) {
-			childProps.onSubmit(passedBackData)
+		if (contentProps.onSubmit) {
+			contentProps.onSubmit(passedBackData)
 		}
 		handleClose()
 	}
@@ -65,7 +65,7 @@ const Modal = ({ children, ...props }) => {
 		return null
 	}
 
-	const childrenWithProps = React.Children.map(children, child => {
+	const content = React.Children.map(children, child => {
 		if (typeof child.type === 'string') {
 			return child
 		}
@@ -74,21 +74,25 @@ const Modal = ({ children, ...props }) => {
 
 	return (
 		<Portal id="modals">
-			<div className="component-modal">
+			<div
+				className={
+					['component-modal', className].filter(el => el != null).join(' ')
+				}
+			>
 				<div className="modal-background"></div>
 				<div className="modal-inner">
-					<div className="modal-exit" onClick={childProps.closeOnOutsideClick ? handleClose : undefined} />
+					<div className="modal-exit" onClick={contentProps.closeOnOutsideClick ? handleClose : undefined} />
 					<div className="modal-card">
-						{childrenWithProps}
-						{childProps.modalActions && (
+						{content}
+						{contentProps.modalActions && (
 							<div className="modal-actions">
-								{childProps.modalActions.map(action => {
+								{contentProps.modalActions.map(action => {
 									if (action === 'cancel') {
 										return <button
 											className="modal-button--cancel"
 											key="modal-button--cancel"
 											onClick={handleCancel}>
-												{childProps.onCancelLabel || 'Cancel'}
+												{contentProps.onCancelLabel || 'Cancel'}
 											</button>
 									} else
 									if (action === 'submit') {
@@ -96,7 +100,7 @@ const Modal = ({ children, ...props }) => {
 											className="modal-button--submit"
 											key="modal-button--submit"
 											onClick={handleSubmit}>
-												{childProps.onSubmitLabel || 'Submit'}
+												{contentProps.onSubmitLabel || 'Submit'}
 											</button>
 									} else {
 										return action
@@ -105,7 +109,7 @@ const Modal = ({ children, ...props }) => {
 							</div>
 						)}
 						<button className="modal-button--close" onClick={handleClose}>
-							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z" fill="#333" /></svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z" fill="currentColor" /></svg>
 						</button>
 					</div>
 				</div>
@@ -162,4 +166,4 @@ const ModalProvider = ({ children }) => {
 	)
 }
 
-export { ModalButton, ModalProvider }
+export { Modal, ModalButton, ModalProvider }
