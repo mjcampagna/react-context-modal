@@ -100,19 +100,21 @@ const Modal = ({ children, ...props }) => {
 	)
 }
 
-const ModalButton = ({ children, content, element = 'button', style }) => {
+const ModalButton = ({ children, className, content, element = 'button', style }) => {
 	const { openModal } = useContext(ModalContext)
 	const Button = element
 	const handleClick = (e) => {
 		e.preventDefault()
-		if (content.props.beforeOpen) {
+		if (content.props && content.props.beforeOpen) {
 			content.props.beforeOpen()
 		}
 		openModal(content)
 	}
   return (
     <Button
-			className="component-modal-button--open"
+			className={
+				['component-modal-button--open', className].filter(el => el != null).join(' ')
+			}
 			onClick={handleClick}
 			style={{ ...style }}
     >
@@ -126,7 +128,13 @@ const ModalContext = createContext()
 const ModalProvider = ({ children }) => {
 	const [modals, setModals] = useState([])
 	const createRandomId = () => '_' + Math.random().toString(36).substr(2, 9)
-	const openModal = nextModal => setModals([...modals, [createRandomId(), nextModal]])
+	const openModal = nextModal => {
+		if (typeof nextModal === 'function') {
+			setModals([...modals, [createRandomId(), nextModal()]])
+		} else {
+			setModals([...modals, [createRandomId(), nextModal]])
+		}
+	}
 	const closeModal = () => setModals([...modals.slice(0, -1)])
 	
 	return (

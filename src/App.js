@@ -9,6 +9,16 @@ export default () => {
     setName(data.name)
   }
 
+  const openModal = (modalName) => {
+    switch (modalName) {
+      case 'one':
+        return (<p>This is Modal One.</p>)
+      case 'two':
+        return (<p>This is Modal Two.</p>)
+      default: null
+    }
+  }
+
   return (
     <ModalProvider>
       <h1>React Context Modal</h1>
@@ -27,6 +37,11 @@ export default () => {
       }>
         Open Long Modal
       </ModalButton>
+
+      <div>
+        <ModalButton content={() => openModal('one')} style={{ marginRight: 12 }}>One</ModalButton>
+        <ModalButton content={() => openModal('two')}>Two</ModalButton>
+      </div>
 
     </ModalProvider>
   )
