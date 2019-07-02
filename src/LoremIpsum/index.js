@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const LoremIpsum = ({ length }) => {
+const LoremIpsum = ({ length, ...props }) => {
 	const paragraphs = length > 10 ? 10 : length < 0 ? 0 : length
 	const loremIpsum = [
 		'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus semper ipsum vitae nisi iaculis, eu aliquam ligula condimentum. Ut lacinia, nibh quis aliquet tempor, leo nulla gravida magna, eget suscipit metus nulla in erat. Curabitur efficitur risus et ornare volutpat. Etiam non luctus libero. Nullam feugiat nulla ac tellus condimentum tincidunt. Aliquam tempor pulvinar velit, ullamcorper dapibus tellus. Aliquam erat volutpat. Mauris id accumsan sem, quis dictum leo. Aenean lacinia odio at magna gravida tempor. Sed ac pharetra mauris. Nullam semper, diam lobortis sagittis iaculis, diam lectus egestas enim, at ornare ipsum mi sed nunc. Phasellus scelerisque justo et quam bibendum, ac porttitor erat eleifend. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porttitor dapibus nisi, eu interdum sapien.',

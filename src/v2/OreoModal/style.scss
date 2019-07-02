@@ -1,0 +1,25 @@
+.component-modal {
+	.modal-card {
+		.modal-header {
+			&.oreo {
+				background-color: #565656;
+				color: #fff;	
+			}
+		}
+		
+		.modal-footer {
+			&.oreo {
+				background-color: #565656;
+				margin-bottom: 0;
+	
+				.modal-button--cancel {
+					color: #fff;
+				}
+	
+				+ .modal-button--close {
+					color: #fff;
+				}
+			}
+		}
+	}
+}
