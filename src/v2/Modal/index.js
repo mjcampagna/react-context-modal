@@ -1,4 +1,4 @@
-import React, { createContext, Fragment, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import Portal from '../../Portal'
 import './style.scss'
 
