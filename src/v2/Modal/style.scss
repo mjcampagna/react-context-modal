@@ -79,7 +79,17 @@
       &:not(.modal-footer) {
 				margin-bottom: 56px;
 			}
-		}
+    }
+    
+    .modal-main {
+      > :first-child {
+        margin-top: 0;
+      }
+
+      > :last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .modal-button--close {
@@ -100,9 +110,9 @@
 
   .modal-header {
     border-radius: 3px 3px 0 0;
-    line-height: 56px;
-    margin: 0 -12px 12px;
-    padding: 0 12px;
+    line-height: 32px;
+    margin: 0 -12px;
+    padding: 12px;
   }
   
   .modal-footer {

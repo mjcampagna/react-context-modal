@@ -78,7 +78,9 @@ const Modal = ({ children, className, ...props }) => {
 						</div>
 					)}
 
-					{children}
+					<div className="modal-main">
+						{children}
+					</div>
 
 					{props.actions && (
 						<div className="modal-footer">
