@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import LoremIpsum from '../../LoremIpsum'
-import { Modal } from '../Modal'
+import { Modal, ModalContext } from '../Modal'
 import OreoModal from '../OreoModal'
 
 const SimpleModal = (props) => {
@@ -14,6 +14,7 @@ const SimpleModal = (props) => {
 }
 
 const ActionModal = (props) => {
+	const { openModal } = useContext(ModalContext)
 	const afterOpen = () => console.log('Fired after open.')
 	const beforeClose = () => console.log('Fired before close.')
 	const afterClose = () => console.log('Fired after close.')
@@ -37,6 +38,7 @@ const ActionModal = (props) => {
 			title="Lorem Ipsum"
 		>
 			<LoremIpsum length={3} />
+			<button onClick={() => openModal(ModalDictionary('simple'))}>Simple Modal</button>
 		</Modal>
 	)
 }
@@ -49,26 +51,23 @@ const ActionOreoModal = (props) => {
 	const onSubmit = () => console.log('Modal submitted')
 
 	return (
-		<Modal
+		<OreoModal
+			actions={[
+				'cancel',
+				'submit',
+			]}
+			afterClose={afterClose}
+			afterOpen={afterOpen}
+			beforeClose={beforeClose}
 			closeOnOutsideClick
+			onCancel={onCancel}
+			onCancelLabel="Cancel"
+			onSubmit={onSubmit}
+			onSubmitLabel="Submit"
+			title="Lorem Ipsum"
 		>
-			<OreoModal
-				actions={[
-					'cancel',
-					'submit',
-				]}
-				afterClose={afterClose}
-				afterOpen={afterOpen}
-				beforeClose={beforeClose}
-				onCancel={onCancel}
-				onCancelLabel="Cancel"
-				onSubmit={onSubmit}
-				onSubmitLabel="Submit"
-				title="Lorem Ipsum"
-			>
-				<LoremIpsum length={3} />
-			</OreoModal>
-		</Modal>
+			<LoremIpsum length={3} />
+		</OreoModal>
 	)
 }
 
