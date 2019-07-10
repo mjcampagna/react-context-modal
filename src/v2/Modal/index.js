@@ -48,11 +48,21 @@ const Modal = ({ children, className, ...props }) => {
 		}
 	}
 
-	const handleSubmit = () => {
-		if (props.onSubmit) {
-			props.onSubmit()
+	const handleSubmit = async () => {
+		let result = true
+		try {
+			if (props.onSubmit) {
+				result = await props.onSubmit()
+			}	
 		}
-		handleClose()
+		catch(error) {
+			console.error(error)
+		}
+		finally {
+			if (result !== false) {
+				handleClose()
+			}
+		}
 	}
 
 	if (!children) {
