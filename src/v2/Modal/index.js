@@ -81,7 +81,9 @@ const Modal = ({ children, className, ...props }) => {
 			<div className="modal-background"></div>
 			<div className="modal-inner">
 				<div
-					className="modal-exit"
+					className={
+						['modal-exit', props.closeOnOutsideClick ? 'closeOnOutsideClick' : undefined].filter(el => el != null).join(' ')
+					}
 					onClick={props.closeOnOutsideClick ? handleClose : undefined}
 				/>
 				<div className="modal-card">
@@ -137,8 +139,8 @@ const ModalProvider = ({ children }) => {
 	const createRandomId = () => '_' + Math.random().toString(36).substr(2, 9)
 	const openModal = nextModal => setModals([...modals, [createRandomId(), nextModal]])
 	const transitions = useTransition(modals, modal => modal[0], {
-		from:  { opacity: 0, cursor: 'default', pointerEvents: 'none' },
-		enter: { opacity: 1, cursor: 'pointer', pointerEvents: 'auto' },
+		from:  { opacity: 0 },
+		enter: { opacity: 1 },
 		leave: { opacity: 0, cursor: 'default', pointerEvents: 'none' },
 	})
 

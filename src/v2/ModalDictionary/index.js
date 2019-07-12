@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import LoremIpsum from '../../LoremIpsum'
 import { Modal, ModalContext } from '../Modal'
 import OreoModal from '../OreoModal'
@@ -37,7 +37,7 @@ const ActionModal = (props) => {
 			onSubmitLabel="Submit"
 			title="Lorem Ipsum"
 		>
-			<LoremIpsum length={3} />
+			<LoremIpsum length={9} />
 			<button onClick={() => openModal(ModalDictionary('simple'))}>Simple Modal</button>
 		</Modal>
 	)
