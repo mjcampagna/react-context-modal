@@ -9,7 +9,8 @@
   "license": "MIT",
   "dependencies": {
     "react": "^16.8.1",
-    "react-dom": "^16.8.1"
+    "react-dom": "^16.8.1",
+    "react-spring": "^8.0.27"
   },
   "repository": {
     "type": "git",

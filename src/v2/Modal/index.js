@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
 import Portal from '../../Portal'
+import { useTransition, animated } from 'react-spring'
 import './style.scss'
 
 const Modal = ({ children, className, ...props }) => {
@@ -135,13 +136,20 @@ const ModalProvider = ({ children }) => {
 	const closeModal = () => setModals([...modals.slice(0, -1)])
 	const createRandomId = () => '_' + Math.random().toString(36).substr(2, 9)
 	const openModal = nextModal => setModals([...modals, [createRandomId(), nextModal]])
+	const transitions = useTransition(modals, modal => modal[0], {
+		from:  { opacity: 0 },
+		enter: { opacity: 1 },
+		leave: { opacity: 0 },
+	})
 
 	return (
 		<ModalContext.Provider value={{ openModal, closeModal }}>
 			{children}
-			{modals.map(modal => (
-				<Portal id="modals" key={modal[0]}>
-					{modal[1]}
+			{transitions.map(({ item, key, props }) => (
+				<Portal id="modals" key={key}>
+					<animated.div style={props}>
+						{item[1]}
+					</animated.div>
 				</Portal>
 			))}
 		</ModalContext.Provider>
