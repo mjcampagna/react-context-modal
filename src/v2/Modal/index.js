@@ -137,9 +137,9 @@ const ModalProvider = ({ children }) => {
 	const createRandomId = () => '_' + Math.random().toString(36).substr(2, 9)
 	const openModal = nextModal => setModals([...modals, [createRandomId(), nextModal]])
 	const transitions = useTransition(modals, modal => modal[0], {
-		from:  { opacity: 0 },
-		enter: { opacity: 1 },
-		leave: { opacity: 0 },
+		from:  { opacity: 0, cursor: 'default', pointerEvents: 'none' },
+		enter: { opacity: 1, cursor: 'pointer', pointerEvents: 'auto' },
+		leave: { opacity: 0, cursor: 'default', pointerEvents: 'none' },
 	})
 
 	return (
