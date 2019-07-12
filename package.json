@@ -12,9 +12,9 @@
     "react-dom": "^16.8.1"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/mjcampagna/react-context-modal"
-  },  
+    "type": "git",
+    "url": "https://github.com/mjcampagna/react-context-modal"
+  },
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "babel-preset-nano-react-app": "^0.1.0",

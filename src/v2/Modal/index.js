@@ -1,9 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react'
 import Portal from '../../Portal'
 import './style.scss'
 
 const Modal = ({ children, className, ...props }) => {
 	const { closeModal } = useContext(ModalContext)
+	const thisModal = useRef()
 
 	useEffect(() => {
 		if (children) {
@@ -74,6 +75,7 @@ const Modal = ({ children, className, ...props }) => {
 			className={
 				['component-modal', className].filter(el => el != null).join(' ')
 			}
+			ref={thisModal}
 		>
 			<div className="modal-background"></div>
 			<div className="modal-inner">

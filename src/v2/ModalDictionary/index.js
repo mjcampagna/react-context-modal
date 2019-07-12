@@ -8,7 +8,7 @@ const SimpleModal = (props) => {
 		<Modal
 			closeOnOutsideClick
 		>
-			<LoremIpsum length={3} />
+			<LoremIpsum length={2} />
 		</Modal>
 	)
 }
