@@ -7,32 +7,6 @@ const Modal = ({ children, className, ...props }) => {
   const { closeModal } = useContext(ModalContext)
   const thisModal = useRef()
 
-  useEffect(() => {
-    if (children) {
-      const originalOverflow = window.getComputedStyle(document.body).overflow
-      document.body.style.overflow = 'hidden'
-      return () => document.body.style.overflow = originalOverflow
-    }
-  }, [children])
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleEsc)
-    return () => window.removeEventListener('keydown', handleEsc)
-  }, [])
-
-  useEffect(() => {
-    if (props.afterOpen) {
-      props.afterOpen()
-    }
-  }, [])
-
-  const handleCancel = () => {
-    if (props.onCancel) {
-      props.onCancel()
-    }
-    handleClose()
-  }
-
   const handleClose = () => {
     if (props.beforeClose) {
       props.beforeClose()
@@ -43,11 +17,11 @@ const Modal = ({ children, className, ...props }) => {
     }
   }
 
-  const handleEsc = (e) => {
-    if (e.key === 'Escape') {
-      e.preventDefault()
-      handleCancel()
+  const handleCancel = () => {
+    if (props.onCancel) {
+      props.onCancel()
     }
+    handleClose()
   }
 
   const handleSubmit = async () => {
@@ -66,6 +40,32 @@ const Modal = ({ children, className, ...props }) => {
       }
     }
   }
+
+  useEffect(() => {
+    if (children) {
+      const originalOverflow = window.getComputedStyle(document.body).overflow
+      document.body.style.overflow = 'hidden'
+      return () => document.body.style.overflow = originalOverflow
+    }
+  }, [children])
+
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault()
+        handleCancel()
+      }
+    }
+
+    window.addEventListener('keydown', handleEsc)
+    return () => window.removeEventListener('keydown', handleEsc)
+  }, [])
+
+  useEffect(() => {
+    if (props.afterOpen) {
+      props.afterOpen()
+    }
+  }, [])
 
   if (!children) {
     return null
