@@ -4,7 +4,7 @@ import './style.scss'
 
 const OreoModal = ({ children, ...props }) => {
 	return (
-		<Modal className="oreo" { ...props }>
+		<Modal className="oreo" {...props}>
 			{children}
 		</Modal>
 	)
